@@ -72,7 +72,11 @@ void setup() {
   utringbuffer_new(history, 10, &our_icd);
 
   // clears bond data on every boot
-  bleBondStore.clearData();
+  pinMode(21, INPUT_PULLUP);
+
+  if (digitalRead(21, LOW)) {
+    bleBondStore.clearData();
+  }
 
   blePeripheral.setBondStore(bleBondStore);
   
